@@ -1,0 +1,1 @@
+- 10/28: Port rows_norm calculation to Python

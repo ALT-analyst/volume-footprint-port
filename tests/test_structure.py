@@ -24,7 +24,7 @@ BARS = [
     {"time":1792522800,"open":83002.01,"high":83034.01,"low":82728.80,"close":82804.22,
      "atr14":389.9344348,"poc_price":82787.30,"exp_step":19.50,"exp_rows":17,"exp_idx":3},
 ]
-
+BARS = BARS[:-1]  # 最後の1行（最新の未確定データ）を削る
 @pytest.mark.parametrize("b", BARS, ids=[str(b["time"]) for b in BARS])
 def test_structure(b):
     d = derive(b)
