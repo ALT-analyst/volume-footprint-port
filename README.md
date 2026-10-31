@@ -57,6 +57,9 @@ Conclusion: the lower-timeframe volume series is not a proportional scaling of
 the exchange 1-minute series. Absolute and proportional volume checks are
 excluded from the verification scope by evidence, not by convenience.
 
+Cross-symbol check: BINANCE:ETHUSDT 1H — step/rows/poc_idx identical (3 bars).
+Volume ratio 11.4x–20.0x, still not reproducible.
+
 ## Scope decision
 
 Verified: structural values derived from OHLC + ATR (platform-independent).

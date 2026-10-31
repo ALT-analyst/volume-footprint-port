@@ -1,1 +1,3 @@
-- 10/28: Port rows_norm calculation to Python
+- 2026-10-28: Port rows_norm calculation to Python
+- 2026-10-29: Add condition to extract only closed bars
+- 2026-10-31: test(eth): verify ETHUSDT 1H structure match
