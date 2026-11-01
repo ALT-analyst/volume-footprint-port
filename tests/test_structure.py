@@ -1,19 +1,5 @@
-import math
 import pytest
-
-# Pine の math.round は 0 から遠い方へ（銀行丸め禁止）
-def pr(x: float) -> int:
-    return math.floor(x + 0.5) if x >= 0 else math.ceil(x - 0.5)
-
-MIN_TICK = 0.01
-
-def derive(bar):
-    """step / rows / poc_idx を Pine と同一手順で導出"""
-    step = pr(pr(bar["atr14"] / 20.0 / MIN_TICK)) * MIN_TICK
-    step = round(step, 10)                       # 浮動小数の末尾誤差を落とす
-    rows = math.ceil((bar["high"] - bar["low"]) / step) + 1
-    poc_idx = (bar["poc_price"] - bar["low"]) / step
-    return {"step": step, "rows": rows, "poc_idx": poc_idx}
+from vf.footprint import derive, pr, MIN_TICK
 
 # --- fixture: BINANCE:BTCUSDT 1H, v4 実測値 ---
 BARS = [
@@ -25,15 +11,20 @@ BARS = [
      "atr14":389.9344348,"poc_price":82787.30,"exp_step":19.50,"exp_rows":17,"exp_idx":3},
 ]
 BARS = BARS[:-1]  # 最後の1行（最新の未確定データ）を削る
+
 @pytest.mark.parametrize("b", BARS, ids=[str(b["time"]) for b in BARS])
 def test_structure(b):
     d = derive(b)
-    # 1 step（atr14 → tick丸め）
     assert d["step"] == pytest.approx(b["exp_step"], abs=1e-9), "step"
-    # 2 rows（切り上げ＋1）
     assert d["rows"] == b["exp_rows"], "rows"
-    # 3 poc_idx（整数であること＝Pineの丸めと一致）
     assert d["poc_idx"] == pytest.approx(b["exp_idx"], abs=1e-9), "poc_idx"
 
 def test_pr_matches_pine_round():
-    assert pr(0.5) == 1 and pr(2.5) == 3 and pr(-0.5) == -1   # Python round() は 2 になる
+    assert pr(0.5) == 1 and pr(2.5) == 3 and pr(-0.5) == -1
+
+def test_rows_norm_matches_pine():
+    """Pine v4 実測値との照合（ETHUSDT 1H, t=1793534400）"""
+    d = derive({"atr14": 8.64, "high": 2270.80, "low": 2255.31, "poc_price": 2260.04})
+    assert d["rows"] == 38
+    assert d["step"] == pytest.approx(0.43)
+    assert round(d["rows_norm"], 2) == 1.05
