@@ -60,6 +60,12 @@ excluded from the verification scope by evidence, not by convenience.
 Cross-symbol check: BINANCE:ETHUSDT 1H — step/rows/poc_idx identical (3 bars).
 Volume ratio 11.4x–20.0x, still not reproducible.
 
+（前略）
+Cross-symbol check: BINANCE:ETHUSDT 1H — step/rows/poc_idx identical (3 bars).
+Volume ratio 11.4x–20.0x, still not reproducible.
+
+Day 4 Discovery: `rows_norm` = `rows * step / (high - low)` verified (1.05 on ETHUSDT 1H). This confirms the total row height slightly exceeds the actual price range, proving the mathematical structure is sound. Volume distribution (`total_vol`) remains environmentally dependent (30.9x ratio).
+
 ## Scope decision
 
 Verified: structural values derived from OHLC + ATR (platform-independent).
