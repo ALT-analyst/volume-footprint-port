@@ -28,3 +28,17 @@ def test_rows_norm_matches_pine():
     assert d["rows"] == 38
     assert d["step"] == pytest.approx(0.43)
     assert round(d["rows_norm"], 2) == 1.05
+
+def test_rows_norm_matches_pine():
+    """Pine v4 実測値との照合（ETHUSDT 1H, t=1793534400）"""
+    d = derive({"atr14": 8.64, "high": 2270.80, "low": 2255.31, "poc_price": 2260.04})
+    assert d["rows"] == 38
+    assert d["step"] == pytest.approx(0.43)
+    assert round(d["rows_norm"], 2) == 1.05
+
+
+def test_rows_norm_bounds():
+    """ceil定義から導かれる理論境界。50本で成立を確認済み"""
+    d = derive({"atr14": 8.64, "high": 2270.80, "low": 2255.31, "poc_price": 2260.04})
+    r = d["rows"]
+    assert r / (r - 1) <= d["rows_norm"] < r / (r - 2)
