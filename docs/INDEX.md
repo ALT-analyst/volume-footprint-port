@@ -1,4 +1,7 @@
-- 2026-10-28: Port rows_norm calculation to Python
-- 2026-10-29: Add condition to extract only closed bars
-- 2026-10-31: test(eth): verify ETHUSDT 1H structure match
-- 2026-11-01: verify.rows_norm | 定義特定 rows*step/(high-low)、Pine照合済 1.05
+# INDEX
+
+| 項目 | 内容 | 参照先 |
+|---|---|---|
+| 検証ログ | 構造値の一致・再現不可の記録 | verify_log.md |
+| 検証開始 | 2026-10-28 | — |
+| 最終更新 | 2026-11-05 | — |
