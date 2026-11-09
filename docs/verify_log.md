@@ -13,6 +13,7 @@
 | 2026-11-01 | rows_norm の定義特定（rows*step/(high-low)、Pine照合 1.05） |
 | 2026-11-06 | 3本で rows_norm 境界を再確認。倍率58〜63倍 | verify_log.md |
 | 2026-11-08 | ETHUSDT 1H 確定足2本で step/rows/poc_idx/rows_norm 境界を再確認（倍率11〜12倍）。3本目はltf_count=5で除外 |
+| 2026-11-09 | ETHUSDT 1H 確定足3本で構造＋境界を再確認（倍率66〜79倍） |
 
 ## 検証済み（Pine と一致）
 
